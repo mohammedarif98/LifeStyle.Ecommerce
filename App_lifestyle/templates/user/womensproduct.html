@@ -1,0 +1,85 @@
+{% load static %}
+{% include "extends/navbar.html" %}
+<link rel="stylesheet" href="{% static 'css/user/listmensproduct.css' %}">
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Merriweather:wght@300&display=swap');
+  @import url('https://fonts.googleapis.com/css2?family=Merriweather:wght@300&display=swap');
+  @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Merriweather:wght@300&display=swap');
+</style>
+<div class="container-fluid" style="padding: 60px 80px;">
+    
+    <div class="row">
+        {% for i in product %}
+        <div class="col-lg-3 col-md-4 col-sm-6 d-flex flex-column align-items-center justify-content-center product-item my-3 bg-white pt-2 "style="border:5px solid #d4d4d4">
+            <div class="product"> 
+              <a href=""><img src="{{ i.product_image.url }}" alt="" class="img-fluid"></a>
+                <ul class="d-flex align-items-center justify-content-center list-unstyled icons">
+                  <li class="icon"><a href="{% url 'Product_Display' i.id %}"><span class="fas fa-expand-arrows-alt"></span></a></li>
+                  <!-- <li class="icon mx-3"><a href=""><span class="far fa-heart"></span></a></li> -->
+                  <li class="icon"><a href="{% url 'Add_Cart' i.id %}"><span class="fas fa-shopping-bag"></span></a></li>
+                </ul>
+            </div>
+            <div class="title pt-1 pb-1 fs-normal my-2" style=" text-transform: capitalize;font-family: 'Merriweather', serif;color:#000000">{{ i.name }}</div>
+            <div class="title pt-1 pb-1 fw-bold mb-2" style="font-family: 'Bebas Neue', cursive;font-family: 'Merriweather', serif;">Price : ₹ {{ i.price }}</div>
+            <!-- <button class="btn  w-100 mb-4" style="background-color:#1d1b1b;"><a href="" style="color:rgb(224, 214, 214);">Buy Now</a></button> -->
+        </div>
+        {% endfor %}
+    </div>
+    
+       <!--Pagination-->
+       <nav aria-label="Page navigation example">
+        <ul class="pagination justify-content-center">
+        {% if product.has_previous %}
+            <li class="page-item">
+            <a class="page-link" href="?page={{ product.previous_page_number }}">Previous</a>
+          </li>
+        {% else %}
+            <li class="page-item disabled">
+            <a class="page-link" href="#" tabindex="-1" aria-disabled="True">Previous</a>
+          </li>
+        {% endif %}
+
+        {% if product.number|add:'-4' > 1 %}
+            <li class="page-item"><a class="page-link" href="?page={{ product.number|add:'-5' }}">&hellip;</a></li>
+        {% endif %}
+
+        {% for i in product.paginator.page_range %}
+            {% if product.number == i %}
+                <li class="page-item active" aria-current="page">
+              <span class="page-link">
+                {{ i }}
+                <span class="sr-only">(current)</span>
+              </span>
+            </li>
+            {% elif i > product.number|add:'-5' and i < product.number|add:'5' %}
+                 <li class="page-item"><a class="page-link" href="?page={{ i }}">{{ i }}</a></li>
+            {% endif %}
+        {% endfor %}
+
+        {% if product.paginator.num_pages > product.number|add:'4' %}
+           <li class="page-item"><a class="page-link" href="?page={{ product.number|add:'5' }}">&hellip;</a></li>
+        {% endif %}
+
+        {% if product.has_next %}
+            <li class="page-item">
+            <a class="page-link" href="?page={{ product.next_page_number }}">Next</a>
+          </li>
+        {% else %}
+            <li class="page-item disabled">
+            <a class="page-link" href="#" tabindex="-1" aria-disabled="True">Next</a>
+          </li>
+        {% endif %}
+      </ul>
+    </nav>
+    <!--end of Pagination-->
+
+
+</div>
+{% include "extends/footer.html" %}
+
+<style>
+  .container-fluid .product-item .product .icons .icon:hover {
+    background-color: #2e2d2d;
+    color: #fff
+}
+</style> 

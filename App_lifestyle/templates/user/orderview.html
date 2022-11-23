@@ -1,0 +1,113 @@
+{% load static %}
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+{% include "extends/navbar.html" %}
+<body style="background-color:rgb(221, 220, 220) ;">
+    <div class="container my-5" style="max-width:1500px;min-height:377px;background-color:rgb(255, 255, 255);padding:10px 10px ">
+        <div class="d-inline"><small>
+            <a href="{% url 'orders' %}"><button class="btn btn-dark float-start ms-4">Back</button></a>
+            <!-- <a href="{% url 'orders' %"><button class="btn btn-normal float-end me-4"><i class="fa fa-file t-plus-1 text-danger fa-fw fa-lg"></i>Invoice</button></a> -->
+            <a href="{% url 'pdf_invoice' order.id %}" class="btn btn-sm btn-white  float-end me-4 border border-dark"><i class="fa fa-file t-plus-1 text-danger fa-fw fa-lg"></i> Download Invoice</a>
+            <a href="{% url 'invoice' order.id %}" class="btn btn-sm btn-white  float-end me-4 border border-dark"><i class="fa fa-file t-plus-1 text-danger fa-fw fa-lg"></i> View Invoice</a>
+
+        </small></div>
+        
+        <div class="tab-content my-5" id="nav-tabContent" >
+            <!-- Order Details -->	
+            <div class="tab-pane fade show active" id="order" role="tabpanel" aria-labelledby="nav-home-tab">
+                <div id="" role="tablist">
+                    <div class="row ">
+                        <div class="col-md-6">
+                            <div class="card" style="min-height: 520px;">
+                                <div class="card-header" role="tab" id="headingOne" data-toggle="collapse" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                    <h4 class="mb-0">
+                                        Shopping Details
+                                    </h4>
+                                </div>
+        
+                                <div id="collapseOne" class="collapse show" role="tabpanel" aria-labelledby="headingOne" data-parent="#accordion">
+                                    <div class="card-body">
+                                        <form>
+                                            <div class="form-group row my-2">
+                                                <dd class="col-sm-4">Full Name</dd>
+                                                    <dt class="col-sm-8">{{order.name}}</dt>
+                                            </div>
+                                            <div class="form-group row my-2">
+                                                <dd class="col-sm-4">Email Address</dd>
+                                                    <dt class="col-sm-8">{{order.email}}</dt>
+                                            </div> 
+                                            <div class="form-group row my-2">
+                                                <dd class="col-sm-4">Address</dd>
+                                                    <dt class="col-sm-8">{{order.address}}</dt>
+                                            </div>
+                                            <div class="form-group row my-2">
+                                                <dd class="col-sm-4">Contact No</dd>
+                                                    <dt class="col-sm-8">{{order.number}}</dt>
+                                            </div>
+                                            <div class="form-group row my-2">
+                                                <dd class="col-sm-4">State</dd>
+                                                    <dt class="col-sm-8">{{order.state}}</dt>
+                                            </div>
+                                            <div class="form-group row my-2">
+                                                <dd class="col-sm-4">City</dd>
+                                                    <dt class="col-sm-8">{{order.city}}</dt>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                    
+                        </div>
+                        <div class="col-md-6">
+                            <div class="card " style="min-height: 520px;">
+                                <div class="card-header">
+                                    <div class="d-inline h4">Order Details</div>
+                                </div>
+                                <div class="card-body">
+                                    
+                                    {% for i in orderitem %}
+                                    <dl class="row">                                        
+                                        <dd class="col-sm-4">Product Name</dd>
+                                        <dt class="col-sm-8">{{i.product_forgn.name}}</dt>
+                                        <dd class="col-sm-4">Product Price</dd>
+                                        <dt class="col-sm-8">₹ {{ i.product_forgn.price }}</dt>
+                                        <dd class="col-sm-4">Product Image</dd>
+                                        <dt class="col-sm-8"><img src="{{i.product_forgn.product_image.url}}" alt="" style="height:100px;width:100px"></dt>
+                                     </dl><hr>
+                                    {% endfor %} 
+                                    <hr>
+                                   <dl class="row">
+                                   <p style="color: black;font-size:20px;font-weight:bolder">Grand Total ( delivary fee incl )<span style="float: right;padding-right:50px">₹ {{order.total_price}} /-</span></p>
+                                    
+                                   </dl>
+                                   <hr>
+                                    <dl class="row">
+                                        <dd class="col-sm-4">Payment Mode</dd>
+                                        <dt class="col-sm-8">{{order.payment_mode}}</dt>
+                                        <dd class="col-sm-4">Order Status</dd>
+                                        <dt class="col-sm-8">{{order.status}}</dt>
+                                        <dd class="col-sm-4">Tracking No</dd>
+                                        <dt class="col-sm-8">{{order.tracking_no}}</dt>                        
+                                        <dd class="col-sm-4">Delivery Type</dd>
+                                        <dt class="col-sm-8">Stantard Delivery</dt>
+                                        <dd class="col-sm-4">Ordered Date</dd>
+                                        <dt class="col-sm-8">{{order.created_at}}</dt>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div></div>
+                
+                    
+                </div>
+            </div>
+
+    </div>
+</body>
+
+<style>
+    .card-header{
+        cursor: pointer;
+      }
+</style>
+
+{% include "extends/footer.html" %}

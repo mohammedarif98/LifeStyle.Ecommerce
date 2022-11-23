@@ -1,0 +1,177 @@
+{% load static %}
+{% include "extends/navbar.html" %}
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Merriweather:wght@300&display=swap');
+  @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Merriweather:wght@300&display=swap');
+</style>
+    <!-- Carousel -->
+    <div id="demo" class="carousel slide" data-bs-ride="carousel">
+
+        <!-- Indicators/dots -->
+        <div class="carousel-indicators">
+        <button type="button" data-bs-target="#demo" data-bs-slide-to="0" class="active"></button>
+        <button type="button" data-bs-target="#demo" data-bs-slide-to="1"></button>
+        <button type="button" data-bs-target="#demo" data-bs-slide-to="2"></button>
+        </div>
+        
+        <!-- The slideshow/carousel -->
+        <div class="carousel-inner" >
+        <div class="carousel-item active">
+            <div class="bg-text d-none d-md-none d-lg-none d-xl-block" >
+                <p class="text-white" style="font-size: 45px;position:absolute ;top: 35%; left: 46%;font-family: Pacifico;">fashion sale</p>
+                <p class="text-white" style="position:absolute ;top: 45%; left: 40%;font-size: 60px;font-family: Rubik Distressed;"> MENS FASHION</p>
+                <!-- <button type="button"  style="position:absolute ;top: 50%; left: 49%;" class="btn btn-outline-dark btn-md">SHOP NOW <i class="bi bi-arrow-right"></i></button> -->
+            </div>
+            <img src="{% static 'images/pexels-mnz-1670770.jpg' %}" alt="Chicago" class="d-block" style="width:100%;">
+        </div>
+
+        <div class="carousel-item">
+            <div class="bg-text d-none d-md-none d-lg-none d-xl-block" >
+                <p class="text-dark" style="font-size: 40px;position:absolute ;top: 36%; left: 31%;font-family: pacifico;">fashion sale</p>
+                <p class="text-dark" style="position:absolute ;top: 44%; left: 26%;font-size: 45px;font-family: Rubik Distressed;"> LADIES FASHION</p>
+                <button type="button"  style="position:absolute ;top: 54%; left: 33.2%;" class="btn btn-outline-dark btn-md">SHOP NOW </button>
+            </div>
+            <img src="{% static 'images/img1.jpg' %}" alt="Chicago" class="d-block" style="width:100%;">
+        </div>
+
+        <div class="carousel-item">
+            <div class="bg-text d-none d-md-none d-lg-none d-xl-block" >
+                <p class="text-dark" style="font-size: 40px;position:absolute ;top: 45%; left: 14.3%;font-family: pacifico;">fashion sale</p>
+                <p class="text-dark" style="position:absolute ;top: 53%; left: 10%;font-size: 50px;font-family: Rubik Distressed;"> ACCESSORIES</p>
+                <button type="button"  style="position:absolute ;top: 63%; left: 17%;" class="btn btn-dark btn-md">SHOP NOW </button>
+            </div>
+            <img src="{% static 'images/img2.jpg' %}" alt="Chicago" class="d-block" style="width:100%;">
+        </div>
+        </div>
+        
+        <!-- Left and right controls/icons -->
+        <button class="carousel-control-prev" type="button" data-bs-target="#demo" data-bs-slide="prev" style="overflow: hidden;"> 
+            <div style="background-color: rgb(8, 8, 8);height:100px ;width:60px;position: relative;right: 39%;">
+                <span class="carousel-control-prev-icon" style="position: relative;top: 37%;"></span>
+            </div>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#demo" data-bs-slide="next" style="overflow: hidden;">
+            <div style="background-color: rgb(8, 8, 8);height:100px ;width:60px;position: relative;left: 39%;">
+                <span class="carousel-control-next-icon" style="position: relative;top: 37%;"></span>
+            </div>
+        </button>
+    </div>
+<!-- image catogary -->
+    <div class="container my-5" style="max-width: 1800px;">
+        <div class="row d-inline-flex gx-4">
+            <div class="col-4 col-sm-4 col-md-4 col-lg-4 gender d-flex align-items-center justify-content-center" style="position: relative;"><img class="img-fluid" src="{% static 'images/catagory3.jpg' %}" width="100%"  alt="">
+              <div style="position: absolute;opacity: 0.8;" class=" border border-4 p-2 d-none d-md-block d-lg-block d-xl-block">
+                  <p class="fw-bold text-white" style="font-size: 24px;">M E N S</p>
+                </div>
+                <a href="#"></a>
+            </div>
+            <div class="col-4 col-sm-4 col-md-4 col-lg-4 gender d-flex align-items-center justify-content-center" style="position: relative;"><img class="img-fluid" src="{% static 'images/catagory1.jpg' %}" width="100%" alt="">
+                <div style="position: absolute;opacity: 0.8;" class=" border border-4 p-2 d-none d-md-block d-lg-block d-xl-block">
+                  <p class="fw-bold text-white" style="font-size: 24px;">W O M E N S</p>
+                </div>
+                <a href="#"></a>
+            </div>
+            <div class="col-4 col-sm-4 col-md-4 col-lg-4 gender d-flex align-items-center justify-content-center" style="position: relative;"><img class="img-fluid" src="{% static 'images/catagory2.jpg' %}" width="100%" alt="">
+              <div style="position: absolute;opacity: 0.8;" class=" border border-4 p-2 d-none d-md-block d-lg-block d-xl-block">
+                  <p class="fw-bold text-white" style="font-size: 24px;">A C C E S S O R I E S</p>
+                </div>
+                <a href="#"></a>
+            </div>
+        </div>
+    </div>
+<!-- mens product display corousile -->
+    <div class="container" style="max-width:1800px ;">
+      <div class="row my-5">
+    <h3 class="mb-4" style="text-underline-offset: 10px"><u> Mens Trending</u></h3>
+        <div class="col-md-3 col-lg-3 snip1138" id="mens"><img src="{% static 'images/9101e3ac613fcb42ac1c0278234f08fb.jpg' %}" class="img-fluid11" alt="">
+          <figcaption><p class="">MEN COLLECTIONs</p></figcaption>
+          <a href="#"></a>
+        </div>
+        <div class="col-md-9 col-lg-9" style="margin: auto;" >
+        <!-- <h2 class="text-center">Trending This Week</h2> -->
+          <div class="carousel" data-flickity='{ "groupCells": true }'>
+            {% for data in mtrending %}
+            <a href="{% url 'Product_Display' data.id %}"><div class="carousel-cell p-2" style="border:1px solid black;">
+              <img src="{{ data.product_image.url }}" class="c-image" alt="">
+              <p class="name text-center my-2" style=" text-transform: capitalize;font-size:20px;font-weight:18px;font-family: 'Merriweather', serif;color:#000000">{{ data.slug }}</p>
+              <p class="name text-center my-2" style="color:black;font-size:15px;font-weight:bold;font-family: 'Bebas Neue', cursive;font-family: 'Merriweather', serif;">Price : ₹ {{ data.price }}</p>
+              <a href="{% url 'Add_Cart' data.id %}"><button class="btn btn-dark w-100">Add To Cart <span class="fa fa-cart-arrow-down"></span></button></a>
+            </div></a>
+            {% endfor %}
+          </div>
+        </div>
+      </div>
+    </div>
+<!-- deal of the week -->
+
+    <div class="container ">
+      <div class="row my-5" style="max-width: 1800px;background-image: radial-gradient( circle farthest-corner at 10% 20%,  rgba(32,27,27,1) 5.2%, rgba(48,40,40,1) 90% );">
+      <!-- <div class="row my-5" style="max-width: 1800px;background-color:#595f49;"> -->
+        <div class="col col-lg-8 d-flex align-items-center justify-content-center flex-column">
+          <h3 class="heading text-white" style="border-bottom:2px solid rgb(124, 86, 2);padding-bottom: 7px;">Deal Of The Week</h3>
+          <p class="name text-white my-2" style="font-size:17px;">The Minimalist Two-Hand Blue Leather Watch</p>
+          <p class="price text-white my-2 fw-bold" style="font-size:15px;">₹ 9.495.00</p>
+        </div>
+        <div class="col col-lg-4 d-flex align-items-center justify-content-center">
+          <img src="{% static 'images/combo7-removebg-preview.png' %}" alt="" >
+        </div>
+      </div>
+    </div>
+
+<!-- womens product display corousile -->
+<div class="container" style="max-width:1800px ;">
+  <div class="row my-5">  
+    <h3 class="mb-4" style="text-underline-offset: 10px"><u> Womens Trending</u></h3>
+    <div class="col-md-9 col-lg-9" style="margin: auto;" >
+    <!-- <h2 class="text-center">Trending This Week</h2> -->
+      <div class="carousel" data-flickity='{ "groupCells": true }' >
+        {% for data in wtrending %}
+        <div class="carousel-cell p-2" style="border:1px solid black;">
+          <img src="{{ data.product_image.url }}" class="c-image" alt="">
+          <p class="name text-center my-2" style=" text-transform: capitalize;font-size:20px;font-weight:18px;font-family: 'Merriweather', serif;color:#000000">{{ data.slug }}</p>
+          <p class="name text-center my-2" style="font-size:15px;font-weight:bold;font-family: 'Bebas Neue', cursive;font-family: 'Merriweather', serif;">Price : ₹ {{ data.price }}</p>
+          <a href="{% url 'Add_Cart' data.id %}"><button class="btn btn-dark w-100">Add To Cart <span class="fa fa-cart-arrow-down"></span></button></a>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+    <div class="col-md-3 col-lg-3 snip1138" id="mens"><img src="{% static 'images/womenssode.jpg' %}" class="img-fluid11" alt="">
+      <figcaption><p class="">LADIE'S COLLECTIONS</p></figcaption>
+      <a href="#"></a>
+    </div>
+  </div>
+</div>
+
+<!-- about shipping  -->
+
+    <div class="container ">
+      <div class="row my-5">
+        <div class="shiping col-6 col-sm-6 col-md-3 col-lg-3  py-4 px-3  d-flex align-items-center justify-content-center border border-end-0" style="background-color:rgb(194, 194, 194);">
+          <i class="bi bi-truck" style="color: rgb(204, 146, 21);"></i>&nbsp;&nbsp;
+          <p class="demo">FREE SHIPPING</p>
+        </div>
+        <div class="shiping col-6 col-sm-6 col-md-3 col-lg-3  py-3 px-3 d-flex align-items-center justify-content-center border" style="background-color:rgb(194, 194, 194);">
+          <i class="bi bi-clock" style="color: rgb(204, 146, 21);"></i>&nbsp;&nbsp;
+          <p class="demo">DELIVERY ON TIME</p>
+        </div>
+        <div class="shiping col-6 col-sm-6 col-md-3 col-lg-3  py-3 px-3 d-flex align-items-center justify-content-center border" style="background-color:rgb(194, 194, 194);">
+          <i class="bi bi-credit-card" style="color: rgb(204, 146, 21);"></i>&nbsp;&nbsp;
+          <p class="demo">SECURE PAYMENT</p>
+        </div>
+        <div class="shiping col-6 col-sm-6 col-md-3 col-lg-3 py-3 px-3 d-flex align-items-center justify-content-center border" style="background-color:rgb(194, 194, 194);">
+          <i class="bi bi-hourglass-split" style="color: rgb(204, 146, 21);"></i>&nbsp;&nbsp;
+          <p class="demo">24 ONLINE SUPPORT</p>
+        </div>
+      </div>
+    </div>
+ 
+{% include "extends/footer.html" %}
+
+<style>
+
+.c-image{
+  max-height: 390px;
+  max-width: 330px;
+}
+
+</style>

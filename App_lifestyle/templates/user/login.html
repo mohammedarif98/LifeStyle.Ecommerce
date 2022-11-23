@@ -1,0 +1,66 @@
+{% load static %}
+{% include "extends/navbar.html" %}
+{% load socialaccount %}
+
+<link rel="stylesheet" href="{% static 'css/user/login.css' %}">
+
+<!-- <body> -->
+<div class="limiter" >
+    <div class="container-login100" style="background-color:#045256;">
+        <div class="wrap-login100">
+            <div class="login100-form-title " style="background-image: url('static/images/360_F_264922838_NErJEovZiP9MTa49apqL1Vs3f88ZT8Dg.jpg');">
+                <!-- <span class="login100-form-title-1 text-dark">
+                    Sign In
+                </span> -->
+            </div>
+            <form class="login100-form validate-form " action="{% url 'User_Login' %}" method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                <center>
+                    {% if messages %}
+                    {% for msg in messages %}
+                    <p style="color: red;">{% if msg.info %}  {% endif %}{{ msg }}</p>
+                    {% endfor %}
+                {% endif %}
+                </center>
+                <div class="wrap-input100 validate-input m-b-26" data-validate="Username is required">
+                    <!-- <span class="label-input100">Username</span> -->
+                    <input class="input100" type="text" name="username"id="username"  placeholder="Enter username">
+                    <span class="focus-input100"></span>
+                    <!-- <a href=""><i class="fa-solid fa-user"></i></a> -->
+                </div>
+         
+                <div class="wrap-input100 validate-input m-b-18 mt-2" data-validate = "Password is required">
+                    <!-- <span class="label-input100">Password</span> -->
+                    <input class="input100" type="password" name="password" id="password" placeholder="Enter password">
+                    <span class="focus-input100"></span>
+                    <!-- <a href=""><i class="fa-solid fa-eye float-end"></i></a> -->
+                </div>
+                <div class="py-2">
+                    <!-- <div> -->
+                        <a href="{% url 'password_reset' %}" class="txt1  text-decoration-none" ><b>Forgot Password?</b></a>
+                    <!-- </div> -->
+                    <!-- <div> -->
+                        <a href="{% url 'Registration_Page' %}" class="txt1  text-decoration-none" style="margin-left: 170px;"><b>Create An Account !</b></a>
+                    <!-- </div> -->
+                </div>
+                <div class="container-login100-form-btn mt-3">
+                    <button id="btn1" class="login100-form-btn">Login</button>
+                </div>
+                <div class="w-100 my-4">
+                    <div class="text-center">
+                        <p class=" mt-2 ">&mdash;&mdash;<b> Or Sign In With </b>&mdash;&mdash;</p>
+                    </div>
+                    <div class="d-flex justify-content-center">
+                        <button class="btn text-white my-3 me-3" style="background-color: rgb(47, 47, 167);width: 180px;"><a href="{% url 'social:begin' 'facebook' %}" style="color: white;"> Facebook &nbsp;<i class="fa-brands fa-facebook"></i></a></button>
+                        <button class="btn text-white my-3" style="background-color: rgb(199, 8, 8);width: 180px;"><a href="{% provider_login_url 'google' method='oauth2' %}"style="color: white;"> Google &nbsp;<i class="fa-brands fa-google"></i></a></button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- </body> -->
+{% include "extends/footer.html" %}
+
+<!-- </body> -->

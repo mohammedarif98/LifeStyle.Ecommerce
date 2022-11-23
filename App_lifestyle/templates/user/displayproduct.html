@@ -1,0 +1,123 @@
+{% load static %}
+{% include "extends/navbar.html" %}
+<link rel="stylesheet" href="{% static 'css/user/displayproduct.css' %}">
+
+<body style="background-color: rgb(211, 208, 208);">  
+    <div class="container my-5" >   
+        <div class="card product_data p-5" style="width: 100%;" style="background-color: rgb(241, 241, 241);">
+            <a href="{% url 'Index' %}"><button class="btn mb-3 " style="background-color: rgb(59, 50, 50);color:aliceblue" type="button"><span class="">&leftarrow;&nbsp;&nbsp;back</span></button></a>
+            <div class="container-fliud" >
+                <div class="wrapper row ">
+                    <div class="preview col-md-6">                       
+                        <div class="preview-pic tab-content">
+                          <div class="tab-pane active" id="pic-1"><img src="{{ product_view.product_image.url }}" style="height: 420px;width:520px"></div>
+                        </div> 
+                    </div>
+                    <div class="details col-md-6 ps-0 mt-1">
+
+                        <!-- <div>
+                         {% if product_view.quantity > 0 %}
+                            <label class="badge bg-success w-25 py-2 mt-4 mb-3 float-end">In Stock</label>
+                        {% else %}
+                            <label class="badge bg-danger w-25 py-2 mt-4 mb-1 float-end">Out Of Stock</label>
+                        {% endif %}
+                        </div> -->
+
+                        <h5 class="product-title my-3">{{ product_view.name }}</h5>
+                        <hr>
+                        <h5 class="price my-2">Category : {{ product_view.slug }}</h5>
+
+                        <h5 class="price my-2">Price : ₹ {{ product_view.price }}</h5>
+
+                        
+
+                        <div class="row">
+                            {% csrf_token %}
+                            <input type="hidden" name="" value="{{ product_view.id }}" class="prod_id">
+                            <!-- <h6 class="mt-1 mb-3">Quantity</h6> -->
+                            <!-- <div class="col-md-3"> -->
+                                <!-- <div class="input-group text-center mb-3" style="display:flex;flex-direction:row; align-items:center">
+                                <button class="input-group-text decrement-btn" >-</button>
+                                <input type="text" name="quantity" class="form-controll qty-input text-center" value="1" style="width:55px;border:0px solid black;height:38px;">
+                                <button class="input-group-text increment-btn" >+</button>
+                                </div> -->
+                            <!-- </div> -->
+                            <div class="col" style="margin-top: 60px;">
+                                <!-- <div> -->
+                                    <a href="{% url 'Add_Cart' product_view.id %}" type="button" class="text-center" style="color:aliceblue;width:300px;border:1px solid black;padding:5px;background-color:black">add to cart&nbsp;&nbsp;<span class="fa fa-cart-arrow-down"></span></a>
+                                <!-- </div> -->
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12 my-4">
+                        <h4>Description</h4>
+                        <p class="mx-4" style="font-size:16px;">{{product_view.description}}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div> 
+ 
+    
+<script>
+    $(document).ready(function(){
+
+        $('.increment-btn').click(function(e){
+            e.preventDefault();
+
+            var inc_val = $(this).closest('.product_data').find('.qty-input').val();
+            var value = parseInt(inc_val,10);
+            value = isNaN(value) ? 0 : value;
+            if(value<20)
+            {
+                value++;
+                $(this).closest('.product_data').find('.qty-input').val(value);
+            }
+        })
+
+        $('.decrement-btn').click(function(e){
+            e.preventDefault();
+
+            var dec_val = $(this).closest('.product_data').find('.qty-input').val();
+            var value = parseInt(dec_val,10);
+            value = isNaN(value) ? 0 : value;
+            if(value > 1)
+            {
+                value--;
+                $(this).closest('.product_data').find('.qty-input').val(value);
+            }
+        })
+        
+        $('.addtocartbtn').click(function(e){
+            e.preventDefault();
+
+            var product_id = $(this).closest('.product_data').find('prod_id').val();
+            var product_qty =  $(this).closest('.product_data').find('.qty-input').val();
+            var token = $('input[name=csrfmiddlewaretoken]').val();
+
+            $.ajax({
+                method : "POST",
+                url : "/add-to-cart",
+                data : {
+                    'product_id':product_id,
+                    'product_qty':product_qty,
+                    csrfmiddlewaretoken : token
+                },
+                
+                success : function (response){
+                    console.log(response)
+
+                }
+            });
+
+        });
+    });
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js" integrity="sha512-aVKKRRi/Q/YV+4mjoKBsE4x3H+BkegoM/em46NNlCqNTmUYADjBbeNefNxYV7giUp0VxICtqdrbqU7iVaeZNXA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>    
+</body>
+
+
+{% include "extends/footer.html" %}

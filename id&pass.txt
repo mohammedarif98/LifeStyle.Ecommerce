@@ -1,0 +1,3 @@
+id=ecom
+pas:ecom
+envname : ecommerce

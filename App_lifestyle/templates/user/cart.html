@@ -1,0 +1,300 @@
+{% load static %}
+{% include "extends/navbar.html" %}
+<link rel="stylesheet" href="{% static 'css/user/cart.css' %}">
+<div class="container-fluid py-5" style="background-color: rgb(235, 229, 229);">
+    <!-- first page -->
+    <div class="card" id="page1">
+        <div class="row">
+            <div class="col-md-8 cart">
+                <div class="title">
+                    <div class="row">
+                        <div class="col"><h4><b>My Cart</b></h4></div>
+                    </div>
+                </div>  
+                
+               
+                
+                {% for i in products %}
+                <div class="row border-top border-bottom">
+                    <div class="row main align-items-center">
+                        <div class="col-2"><img class="img-fluid" src="{{ i.product_forgn.product_image.url }}"></div>
+                        <div class="col-md-6">
+                            <div class="row text-muted">{{ i.product_forgn.name }}</div>
+                            <div class="row">{{ i.product_forgn.slug }}</div>
+                        </div>
+                       
+                        <div class="col-md-4">₹ {{ i.product_forgn.price }} <a href="{% url 'Delete_Cart' i.id %}"><span class="close float-end fw-bold fs-5">&#10005;</span></a></div>
+                    </div>
+                </div>
+                {% endfor %}
+                
+                
+                <div class="back-to-shop"><a href="{% url 'Index' %}">&leftarrow;</a><span class="text-muted">Back to shop</span></div>
+            </div>
+            <div class="col-md-4 summary">
+                <div><h5><b>Summary</b></h5></div>
+                <hr>
+                <div class="row">
+                    <div class="col fw-bold fs-5" style="padding-left:0;">ITEMS </div>
+                    <div class="col text-right fw-bold fs-5"> {{ count }}</div>
+                </div>
+                <div class="form1">
+                    <p>SHIPPING</p>
+                    <select><option class="text-muted">Standard-Delivery- ₹ 100 </option></select>
+                    
+                </div>
+                <div class="row" style="border-top: 1px solid rgba(0,0,0,.1); padding: 2vh 0;">
+                    <div class="col fw-bold fs-5">TOTAL PRICE</div>
+                    <div class="col text-right fw-bold fs-5">₹ {{sum}}</div>
+                </div>
+                <button class="btn" id="button" >CHECKOUT</button>
+                <!-- <button class="btn" id="button" >CHECKOUT</button> -->
+
+            </div>
+        </div>
+        
+    </div>
+    <!-- sec page -->
+
+    <div class="card" id='page2' >
+        <div class="row ">
+            <div class="col-md-8 col-lg-7 cart">
+                <div class="title">
+                    <div class="row">
+                        <div class="col"><h4><b>Billing Address</b></h4></div>
+                        <!-- <div class="col align-self-center text-right text-muted ">{{count}} items</div> -->
+                    </div>
+                </div> 
+
+                <form action="{% url 'placeorder' %}" method="post">
+                    {% csrf_token %}
+                    <div class="row">
+                        <div class="col">
+                            <div class="form-floating mb-3">
+                                <input type="text" required class="form-control" id="floatingInput" name="name">
+                                <label for="floatingInput">Name</label>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="form-floating mb-3">
+                                <input type="tel" required class="form-control" id="floatingInput" name="number">
+                                <label for="floatingInput">Phone Number</label>
+                            </div>
+                        </div>
+                    <div class="row">
+                        <div class="col">
+                            <div class="form-floating mb-3">
+                                <input type="email" required class="form-control" id="floatingInput" name="email">
+                                <label for="floatingInput">Email address</label>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="form-floating mb-3">
+                                <input type="number" required class="form-control" id="floatingInput" name="pincode">
+                                <label for="floatingInput">Pin Coder</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <div class="form-floating mb-3">
+                                <input type="text" required class="form-control" id="floatingInput" name="state">
+                                <label for="floatingInput">State</label>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="form-floating mb-3">
+                                <input type="text" required class="form-control" id="floatingInput" name="city">
+                                <label for="floatingInput">City</label>
+                            </div>
+                        </div>
+                    </div>
+                        
+                    </div>
+                    
+                    <div class="row">
+                        <div class="col">
+                            <div class="form-floating">
+                                <textarea required class="form-control" id="floatingTextarea2" style="height: 100px" name="address"></textarea>
+                                <label for="floatingTextarea2">Address</label>
+                            </div>
+                        </div>
+                    </div>
+                    
+
+                <!-- <div class="back-to-shop"><a href="" id="button">&leftarrow;</a><span class="text-muted">Back</span></div> -->
+                <a href="{% url 'Cart_View' %}"><button class="btn w-25" type="button"  >Back</button></a>
+            </div>
+            <div class="col-md-4 col-lg-5 summary">
+                <div><h5><b>Order Summary</b></h5></div>
+                <hr>
+                
+                <div class="container mt-3">           
+                    <table class="table">
+                      <thead>
+                        <tr>
+                          <th>Product</th>
+                          <th></th>
+                          <th>Price</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {% for i in products %}
+                        <tr>
+                          <td>{{ i.product_forgn.name }}</td>
+                          <td></td>
+                          <td>₹ {{ i.product_forgn.price }} </td>
+                        </tr>
+                        {% endfor %}
+                      </tbody>
+                      <tfoot>
+                        <tr>
+                          <td> <b>Grand Total</b> </td>
+                          <td></td>
+                          <td> <b>₹ {{sum}}</b> </td>
+
+                        </tr>
+                      </tfoot>
+                    </table>
+                    <!-- <div class="row" style="border-top: 1px solid rgba(0,0,0,.1); padding: 2vh 0;">
+                        <div class="col fw-bold fs-5">TOTAL PRICE</div>
+                        <div class="col text-right fw-bold fs-5">₹ {{total}}</div>
+                    </div> -->
+                  </div>
+                  <input type="hidden" value="Cash On Delivary" name="payment_mode">
+                <button class="btn my-0 " type="submit" id="" >COD | Place Order</button>
+                <button class="btn mt-2 payrazorpay" type="button" id="rzp-button1" >RAZORPAY</button>
+
+            </div>
+        </div>
+    </form>
+    </div>
+
+</div>
+
+<style>
+    form .form-control:focus{
+        border-color: #18191a;
+        box-shadow: none;
+      }
+</style>
+
+
+<script>
+    $("#page1").show();
+    $("#page2").hide();
+    
+    var texts = [page1,page2];
+    var arrayLength = texts.length;
+    
+    $(document).on ("click","#button", function () {
+        var visibleEle = $('[id^=page]:visible');
+        var nextEle = visibleEle.next('[id^=page]');
+        if (nextEle.length == 0) {
+            nextEle = $('[id^=page]:first');
+        }
+        visibleEle.hide();
+        nextEle.show();
+    });
+</script>
+
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+
+<!-- razorpay  cdn -->
+<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+
+<script>
+    $(document).ready(function(){
+
+        $('.payrazorpay').click(function(e){
+            e.preventDefault();
+
+            var name = $("[name='name']").val();
+            var number = $("[name='number']").val();
+            var email = $("[name='email']").val();
+            var pincode = $("[name='pincode']").val();
+            var state = $("[name='state']").val();
+            var city = $("[name='city']").val();
+            var address = $("[name='address']").val();
+            var token = $("[name='csrfmiddlewaretoken']").val()
+            
+            if(name=="" || number=="" || email=="" || pincode=="" || state=="" || city=="" || address=="")
+            {
+                swal("Alert!","all fields are mandatory!","error");
+                return false;
+            }
+            else
+            {
+                $.ajax({
+                    method : 'GET',
+                    url : '/proceed-to-pay',
+                    success : function(response){
+                       // console.log(response);
+                       var options = {
+                        "key": "rzp_test_UqgCv9Q9WuccAo", // Enter the Key ID generated from the Dashboard
+                        "amount": response.total_price*100, // Amount is in currency subunits. Default currency is INR. Hence, 50000 refers to 50000 paise
+                        "currency": "INR",
+                        "name": "LifeStyle",
+                        "description": "Thank you",
+                        "image": "https://example.com/your_logo",
+                        //"order_id": "order_9A33XWu170gUtm", //This is a sample Order ID. Pass the `id` obtained in the response of Step 1
+                        "handler": function (responseb){
+                            alert(responseb.razorpay_payment_id);
+                            data = {
+                              "name" : name,
+                              "number" : number,
+                              "email" : email,
+                              "pincode" : pincode,
+                              "state" : state,
+                              "city" : city,
+                              "address"  : address,
+                              "payment_mode" : "paid by razorpay",
+                              "payment_id" : responseb.razorpay_payment_id,
+                              csrfmiddlewaretoken : token
+                            }
+                            $.ajax({
+                                type : 'POST',
+                                url : "/placeorder",
+                                data : data,
+                              
+                                success: function (responsec){
+                                    swal("congratualations", responsec.status ,"successs").then((value)=>{
+                                        window.location.href="/orders"
+                                    })
+                                    
+                                }
+                            })
+                        },
+                        "prefill": {
+                            "name": name,
+                            "email": email,
+                            "contact": number
+                        },
+                        
+                        "theme": {
+                            "color": "#3399cc"
+                        }
+                    };
+                        var rzp1 = new Razorpay(options);
+            
+                        rzp1.open();
+                    }
+                });
+               
+                }
+                   
+        });
+    
+    })
+</script> 
+
+{% include "extends/footer.html" %}
+
+
+<!-- <script src="{% static 'js/cart.js' %}"></script> -->
+
+<!-- sweetalert.js cdn -->
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<!-- jquery cdn -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>

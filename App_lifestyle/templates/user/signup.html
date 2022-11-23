@@ -1,0 +1,68 @@
+{% load static %}
+{% include "extends/navbar.html" %}
+
+<link rel="stylesheet" href="{% static 'css/user/signup.css' %}">
+
+<!-- <body> -->
+    
+    <div class="wrapper" style="background-color:#045256;">
+        <div class="inner">
+            <div class="image-holder">
+                <img src="{% static 'images/harry-cunningham-7qCeFo19r24-unsplash.jpg' %}" alt="" height="100%">
+            </div>
+            <form action="{% url 'Registration' %}" method="post" enctype="multipart/form-data" >
+                {% csrf_token %}
+                <h3>Registration Form</h3>
+                <div class="form-group">
+                    <input type="text" name="firstname" placeholder="First Name" class="regform">
+                    <input type="text" name="lastname" placeholder="Last Name" class="regform">
+                </div>
+                <div class="form-wrapper">
+                    <input type="text" name="username" placeholder="Username" class="regform">
+                    <i class="bi bi-person-fill" style="font-size: 15px;"></i>
+                </div>
+                <div class="form-wrapper">
+                    <input type="text" name="email" placeholder="Email Address" class="regform">
+                    <i class="bi bi-envelope-fill" style="font-size: 15px;"></i>
+                </div>
+                <div class="form-group">
+                    <input type="text" name="contact" placeholder="Phone number" class="regform">
+                    <select name="gender" id="" class="regform" style="width: 140px;">
+                        <option value="" disabled selected>Gender</option>
+                        <option value="male">&nbsp;&nbsp;&nbsp;&nbsp;Male</option>
+                        <option value="femal">&nbsp;&nbsp;&nbsp;&nbsp;Female</option>
+                        <option value="other">&nbsp;&nbsp;&nbsp;&nbsp;Other</option>
+                    </select>&nbsp;
+                    <!-- <i class="bi bi-caret-down-fill" style="font-size: 17px"></i> -->
+                    <i class="fa-solid fa-person-half-dress"  style="font-size: 15px"></i>
+                </div>
+                <div class="form-wrapper">
+                    <input type="text" name="address" placeholder="Address" class="regform">
+                    <i class="bi bi-file-text-fill" style="font-size: 15px;"></i>
+                </div>
+                <div class="form-wrapper">
+                    <input type="password" name="password" placeholder="Password" class="regform">
+                    <i class="bi bi-lock-fill" style="font-size: 15px;"></i>
+                </div>
+                <div class="form-wrapper">
+                    <input type="password" name="c_password" placeholder="Confirm Password" class="regform">
+                    <i class="bi bi-lock-fill" style="font-size: 15px;"></i>
+                </div>
+                <div class="form-wrapper">
+                    <input type="file" class="input" name="photo" accept="image/*" placeholder="Photo">
+                    <i class="bi bi-file-earmark-image-fill" style="font-size: 15px;"></i>
+                </div>
+                <center>
+                    {% if messages %}
+                    {% for msg in messages %}
+                    <p style="color: red;">{% if msg.info %}  {% endif %}{{ msg }}</p>
+                    {% endfor %}
+                {% endif %}
+                </center>
+                <button>Register<i class="bi bi-arrow-right" style="font-size: 15px;"></i></button>
+            </form>
+        </div>
+    </div> 
+<!-- </body> -->
+
+{% include "extends/footer.html" %}

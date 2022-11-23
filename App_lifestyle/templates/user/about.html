@@ -1,0 +1,50 @@
+{% load static %}
+{% include "extends/navbar.html" %}
+
+
+<div class="header-image mb-5">
+        <img src="{% static 'images/about-image.jpg' %}"  alt="" >
+</div>
+<div class="container">
+    <div class="row">
+        <div class="col  my-5">
+            <h2 class="abt-header"><A>About Us</A></h2>
+            <p class="abt"><span style="color:rgb(165, 54, 54);font-weight: bold;font-size: 20px;">LifeStyle</span> is fashion based ecommerce website for mens, womens and kids. The importance of fashion cannot be overstated. It has a positive impact on one’s life and, like anything that brings joy, it is worthwhile to perform properly. </p>
+        </div>
+        <div class="col my-5">
+            <img src="{% static 'images/fashion-1024x682-1.jpg' %}" alt="">
+        </div>
+    </div>
+</div>
+
+<div class="container ">
+    <div class="row my-5">
+      <div class="col-6 col-sm-6 col-md-3 col-lg-3  py-4 px-3  d-flex align-items-center justify-content-center border border-end-0" style="background-color:rgb(194, 194, 194);">
+        <i class="bi bi-truck" style="color: rgb(204, 146, 21);"></i>&nbsp;&nbsp;
+        <p class="demo">FREE SHIPPING</p>
+      </div>
+      <div class="col-6 col-sm-6 col-md-3 col-lg-3  py-3 px-3 d-flex align-items-center justify-content-center border" style="background-color:rgb(194, 194, 194);">
+        <i class="bi bi-clock" style="color: rgb(204, 146, 21);"></i>&nbsp;&nbsp;
+        <p class="demo">DELIVERY ON TIME</p>
+      </div>
+      <div class="col-6 col-sm-6 col-md-3 col-lg-3  py-3 px-3 d-flex align-items-center justify-content-center border" style="background-color:rgb(194, 194, 194);">
+        <i class="bi bi-credit-card" style="color: rgb(204, 146, 21);"></i>&nbsp;&nbsp;
+        <p class="demo">SECURE PAYMENT</p>
+      </div>
+      <div class="col-6 col-sm-6 col-md-3 col-lg-3 py-3 px-3 d-flex align-items-center justify-content-center border" style="background-color:rgb(194, 194, 194);">
+        <i class="bi bi-hourglass-split" style="color: rgb(204, 146, 21);"></i>&nbsp;&nbsp;
+        <p class="demo">24 ONLINE SUPPORT</p>
+      </div>
+    </div>
+  </div>
+
+
+
+  <style>
+    .abt{
+        font-size: 17px;
+    }
+
+  </style>
+
+{% include "extends/footer.html" %}

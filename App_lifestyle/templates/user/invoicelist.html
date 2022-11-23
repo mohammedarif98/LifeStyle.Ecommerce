@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Latest compiled and minified CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Latest compiled JavaScript -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- bootstrap icon -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.3/font/bootstrap-icons.css">
+    <!-- <link rel="stylesheet" href="{% static 'css/user/invoice.css' %}"> -->
+    <title>Invoice</title>
+    <style type="text/css">
+        body{
+            margin-top:20px;
+            background:#eee;
+        }
+        
+        .invoice {
+            background: #fff;
+            padding: 20px
+        }
+        
+        .invoice-company {
+            font-size: 20px
+        }
+        
+        .invoice-header {
+            margin: 0 -20px;
+            background: #f0f3f4;
+            padding: 20px
+        }
+        
+        
+        .invoice-price {
+            background: #f0f3f4;
+            display: table;
+            width: 100%
+        }
+        
+        .invoice-price .invoice-price-left,
+        .invoice-price .invoice-price-right {
+            display: table-cell;
+            padding: 20px;
+            font-size: 20px;
+            font-weight: 600;
+            width: 75%;
+            position: relative;
+            vertical-align: middle
+        }
+        
+        .invoice-price .invoice-price-left .sub-price {
+            display: table-cell;
+            vertical-align: middle;
+            padding: 0 20px
+        }
+        
+        .invoice-price small {
+            font-size: 12px;
+            font-weight: 400;
+            display: block
+        }
+        
+        .invoice-price .invoice-price-row {
+            display: table;
+            float: left
+        }
+        
+        .invoice-price .invoice-price-right {
+            width: 25%;
+            background: #2d353c;
+            color: #fff;
+            font-size: 28px;
+            text-align: right;
+            vertical-align: bottom;
+            font-weight: 300
+        }
+        
+        .invoice-price .invoice-price-right small {
+            display: block;
+            opacity: .6;
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            font-size: 12px
+        }
+        
+        .invoice-footer {
+            border-top: 1px solid #ddd;
+            padding-top: 10px;
+            font-size: 10px
+        }
+        
+        .invoice-note {
+            color: #999;
+            margin-top: 80px;
+            font-size: 85%
+        }
+        
+        
+        
+        
+    </style>
+</head>
+<body>
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+<div class="container">
+   <div class="col-md-12">
+      <div class="invoice">
+         <!-- begin invoice-company -->
+         <div class="invoice-company text-inverse f-w-600 mb-4">
+           <p style="font-weight:bold;font-size:29px"><span style="color:rgb(165, 54, 54);">Life</span>Style</p>
+         </div>
+         <!-- end invoice-company -->
+         <!-- begin invoice-header -->
+         <div class=" invoice-header">
+            <table class="table table-borderless">  
+               <tbody>
+                 
+                 <tr>
+                   <td><span>From :</span></td>
+                   <td><span>To :</span></td>
+                   <td><span>Invoice Details</span></td>
+                 </tr>
+                 <tr>
+                   <td><span>LifeStyle.In</span></td>
+                   <td>Name : {{orders.name}}</td>
+                   <td>Tracking No : {{orders.tracking_no}}</td>
+                 </tr>  
+                 <tr>
+                  <td><span>LifeStyle Godown Kerala</span></td>
+                  <td>Address : {{orders.address}}</td>
+                  <td>Booking Date : {{orders.created_at}}</td>
+                </tr>
+                <tr>
+                  <td><span>Ernakulam,634024 {{i.price}}</span></td>
+                  <td>State : {{orders.state}},{{orders.city}}</td>
+                  <td>Payment Mode : {{orders.payment_mode}}</td>
+                </tr>
+                <tr>
+                  <td>Phone : +91 33424323151</td>
+                  <td>Phone : {{orders.number}}</td>
+                  <td>Payment Id :{{orders.payment_id}}</td>
+                </tr> 
+               </tbody>
+             
+             </table>
+         </div>
+         <!-- end invoice-header -->
+         <!-- begin invoice-content -->
+         <div class="invoice-content">
+            <!-- begin table-responsive -->
+            <div class="table-responsive">
+               <table class="table table-invoice">
+                  <thead>
+                     <tr>
+                        <th class="" >PRODUCT N0</th>
+                        <th>PRODUCT NAME</th>
+                        <th class="" >PRICE</th>
+                     </tr>
+                  </thead>
+                  <tbody>
+                     {% for i in order %}
+                     <tr>
+                        <td>
+                           <span class="text-center">{{i.product_forgn.id}}</span><br>
+                        </td>
+                        <td class="">{{i.product_forgn.name}}</td>
+                        <td class=" ">₹ {{i.product_forgn.price}}</td>
+                     </tr>
+                     {% endfor %}
+                     <!-- <tr> -->
+                        <!-- <tfoot >
+                           <td><b>TOTAL PRICE ( DELIVARY FEE INCL ): {{ orders.total_price }} /- </b></td>
+                        </tfoot> -->
+                     <!-- </tr> -->
+                     
+                  </tbody>
+               </table>
+            </div>
+            <!-- end table-responsive -->
+            <!-- begin invoice-price -->
+            <div class="invoice-price">
+               <div class="invoice-price-left">
+                  <div class="invoice-price-row">
+                     <div class="sub-price">
+                      
+                        <!-- <small>SUBTOTAL</small> -->
+                        <!-- <span class="text-inverse">₹ {{ order.order_forgn.product_forgn.price }}</span> -->
+                     </div>
+                     <!-- <div class="sub-price">
+                        <i class="fa fa-plus text-muted"></i>
+                     </div> -->
+                     <div class="sub-price">
+                        <small>DELIVARY FEE</small>
+                        <span class="text-inverse">₹ 100</span>
+                     </div>
+                  </div>
+               </div>
+               <div class="invoice-price-right">
+                  <small>TOTAL</small> <span class="f-w-600">₹ {{ orders.total_price }} /-</span>
+               </div>
+               
+            </div>
+            
+         </div>
+       
+   
+         <div class="invoice-note mb-4">
+            * Make all cheques payable to [Your Company Name]<br>
+            * Payment is due within 30 days<br>
+            * If you have any questions concerning this invoice, contact  [Name, Phone Number, Email]
+         </div>
+      
+         <div class="invoice-footer">
+            <p class="text-center m-b-5 f-w-600">
+               THANK YOU FOR YOUR SUPPORT
+            </p>
+            <center>
+            <p class="">
+               <span class="m-r-10"><i class="fa fa-fw fa-lg fa-globe"></i> LifeStyle.com</span>
+               <span class="m-r-10"><i class="fa fa-fw fa-lg fa-phone-volume"></i> +918192302</span>
+               <span class="m-r-10"><i class="fa fa-fw fa-lg fa-envelope"></i> lifestyle@gmail.com</span>
+            </p></center>
+         </div>
+
+      </div>
+   </div>
+</div>
+</body>
+
+</html>
