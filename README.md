@@ -1,1 +1,1 @@
-# LifeStyle.Ecommerce
+# LifeStyle.Ecommerce-python Django
